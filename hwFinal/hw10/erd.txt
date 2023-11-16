@@ -1,0 +1,32 @@
+
+Robot {
+	id integer pk increments
+	model string
+	fabrichumber string
+	version string
+	status string
+	resourse integer
+	machdress string
+	idGroupUser integer *> GroupUser.id
+	comment text
+}
+
+GroupUser {
+	id integer pk increments *>* User.id
+	name string
+}
+
+User {
+	id integer pk increments
+	login string
+	hash string
+}
+
+Schedule {
+	id integer pk increments
+	idRobot integer > Robot.id
+	dateTime datetime
+	location integer
+	mode integer
+}
+

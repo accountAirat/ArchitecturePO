@@ -1,0 +1,55 @@
+
+Patient {
+	id integer pk increments
+	typePolicy string
+	numberPolicy integer unique
+	lastName string
+	firstName string
+	middleТame string
+	bithDate date
+	sex string *> Sex.id
+}
+
+Doctor {
+	id integer pk increments
+	lastName string
+	firstName string
+	middleТame string null
+	bithDate date
+	sex integer *> Sex.id
+	specialityID integer *> Speciality.id
+}
+
+Speciality {
+	id integer pk increments
+	speciality string
+}
+
+Sex {
+	id integer pk increments
+	sex string unique
+}
+
+patientHistory {
+	id integer pk increments
+	receptionID integer > Reception.id
+	complaints text null
+	treatment text null
+	analyzes integer null >* Analyzes.id
+}
+
+Analyzes {
+	id integer pk increments *>* patientHistory.analyzes
+	name string
+	result text null
+	dataTime datetime null
+	ReceptionID integer > Reception.id
+}
+
+Reception {
+	id integer pk increments
+	patient integer *> Patient.id
+	doctor integer *> Doctor.id
+	dateTime datetime
+}
+
